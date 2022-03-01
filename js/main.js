@@ -10,13 +10,13 @@ const searchPhone = () => {
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchFieldText}`
     fetch(url)
       .then(res => res.json())
-      .then(data => displaySearch(data.data))
+      .then(data => displaySearchResult(data.data))
   }
 
 }
 
 
-const displaySearch = phones => {
+const displaySearchResult = phones => {
   const setSearchResult = document.getElementById('set-search-result');
   setSearchResult.textContent = '';
   for (const phone of phones) {
@@ -38,9 +38,25 @@ const displaySearch = phones => {
 
 
 
-const loadPhoneDetail = phoneDetail => {
-  const url = `https://openapi.programming-hero.com/api/phone/${phoneDetail}`
+const loadPhoneDetail = phoneId => {
+  const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`
   fetch(url)
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => displayPhoneDetails(data.data))
+}
+
+
+const displayPhoneDetails = phoneDetail => {
+  const setPhoneDetail = document.getElementById('set-phone-details')
+  const div = document.createElement('div');
+  div.innerHTML = `
+      <div class="card">
+      <img src="${phoneDetail.image}" class="card-img-top" alt="...">
+        <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+  `;
+  setPhoneDetail.appendChild(div);
 }
