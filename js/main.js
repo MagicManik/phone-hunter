@@ -16,6 +16,7 @@ const searchPhone = () => {
 }
 
 
+
 const displaySearchResult = phones => {
   const setSearchResult = document.getElementById('set-search-result');
   setSearchResult.textContent = '';
@@ -28,7 +29,7 @@ const displaySearchResult = phones => {
             <div class="card-body">
             <h5 class="card-title">${phone.phone_name}</h5>
             <p class="card-text">${phone.brand}</p>
-            <button onclick="loadPhoneDetail('${phone.slug}')">Details</button>
+            <button onclick="loadPhoneDetail('${phone.slug}')" class="btn btn-primary">Details</button>
           </div>
       </div>
     `;
@@ -46,17 +47,29 @@ const loadPhoneDetail = phoneId => {
 }
 
 
-const displayPhoneDetails = phoneDetail => {
+
+const displayPhoneDetails = phoneDetails => {
+  // console.log(phoneDetails);
   const setPhoneDetail = document.getElementById('set-phone-details')
+  setPhoneDetail.innerText = '';
   const div = document.createElement('div');
   div.innerHTML = `
-      <div class="card">
-      <img src="${phoneDetail.image}" class="card-img-top" alt="...">
-        <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
+    <div class="card">
+      <img src="${phoneDetails.image}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">${phoneDetails.name}</h5>
+        <p class="card-text">${phoneDetails.releaseDate}</p>
+        <ul id="setMainFeatures"></ul>
+      </div>
+    </div>
   `;
   setPhoneDetail.appendChild(div);
+
+  const setMainFeatures = document.getElementById('setMainFeatures');
+  for (const mainFeature in phoneDetails.mainFeatures) {
+    console.log(mainFeature);
+    const li = document.createElement('li');
+    li.innerText = `${mainFeature}: ${phoneDetails.mainFeatures[mainFeature]}`
+    setMainFeatures.appendChild(li);
+  }
 }
