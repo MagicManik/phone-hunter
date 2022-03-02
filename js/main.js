@@ -23,23 +23,27 @@ const displaySearchResult = phones => {
   const setPhoneDetail = document.getElementById('set-phone-details');
   setSearchResult.textContent = '';
   setPhoneDetail.textContent = '';
-  for (const phone of phones) {
+
+  // control search result will be not more than 20
+  const phoneSliced = phones.slice(0, 20);
+
+  phoneSliced.forEach(phone => {
     const div = document.createElement('div');
     div.innerHTML = `
-      <div class="col">
-          <div class="card h-100 border-0 shadow rounded-3">
-            <img class="w-50 mx-auto mt-4" src="${phone.image}" class="card-img-top" alt="...">
-            <div class="card-body mt-4">
-            <h5 class="card-title ms-2">${phone.phone_name}</h5>
-            <h6 class="card-text text-primary ms-2">${phone.brand}</h6>
-           <div class="card border-0 mt-4 mb-3">
-           <button onclick="loadPhoneDetail('${phone.slug}')" class="btn btn-primary rounded-pill w-50 mx-auto px-5">Details</button>
-           </div>
-          </div>
-      </div>
-    `;
+    <div class="col">
+        <div class="card h-100 border-0 shadow rounded-3">
+          <img class="w-50 mx-auto mt-4" src="${phone.image}" class="card-img-top" alt="...">
+          <div class="card-body mt-4">
+          <h5 class="card-title ms-2">${phone.phone_name}</h5>
+          <h6 class="card-text text-primary ms-2">${phone.brand}</h6>
+         <div class="card border-0 mt-4 mb-3">
+         <button onclick="loadPhoneDetail('${phone.slug}')" class="btn btn-primary rounded-pill mx-auto px-4">Details</button>
+         </div>
+        </div>
+    </div>
+  `;
     setSearchResult.appendChild(div);
-  }
+  })
 }
 
 
@@ -66,9 +70,9 @@ const displayPhoneDetails = phoneDetails => {
         <h6 id="release-date" class="card-text text-center">${phoneDetails.releaseDate}</h6>
         <h6 id="release-date" class="card-text text-center">Brand:
         <span class="text-primary">${phoneDetails.brand}</span></h6>
-        <p class="fw-bold mt-4"><u>Main Features:</u></p>
+        <p class="fw-bold mt-4"><u class="text-primary">Main Features</u></p>
         <ul id="setMainFeatures"></ul>
-        <p class="fw-bold mt-4"><u>Other Features:</u></p>
+        <p class="fw-bold mt-4"><u class="text-primary">Other Features</u></p>
         <ul id="setOtherFeatures"></ul>
       </div>
     </div>
@@ -76,7 +80,7 @@ const displayPhoneDetails = phoneDetails => {
   setPhoneDetail.appendChild(div);
   const releaseDate = document.getElementById('release-date');
   if (releaseDate.innerText === '') {
-    releaseDate.innerHTML = `<span class="text-danger">No released date found</span>`
+    releaseDate.innerHTML = `<span class="text-danger">Release date is not found</span>`
   }
 
   const setMainFeatures = document.getElementById('setMainFeatures');
