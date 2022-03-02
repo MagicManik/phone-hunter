@@ -18,6 +18,7 @@ const searchPhone = () => {
 
 
 const displaySearchResult = phones => {
+  console.log(phones);
   const setSearchResult = document.getElementById('set-search-result');
   const setPhoneDetail = document.getElementById('set-phone-details');
   setSearchResult.textContent = '';
@@ -28,10 +29,10 @@ const displaySearchResult = phones => {
       <div class="col">
           <div class="card h-100 border-0 shadow rounded-3">
             <img class="w-50 mx-auto mt-4" src="${phone.image}" class="card-img-top" alt="...">
-            <div class="card-body">
-            <h5 class="card-title">${phone.phone_name}</h5>
-            <h6 class="card-text text-primary">${phone.brand}</h6>
-           <div class="card border-0">
+            <div class="card-body mt-4">
+            <h5 class="card-title ms-2">${phone.phone_name}</h5>
+            <h6 class="card-text text-primary ms-2">${phone.brand}</h6>
+           <div class="card border-0 mt-4 mb-3">
            <button onclick="loadPhoneDetail('${phone.slug}')" class="btn btn-primary rounded-pill w-50 mx-auto px-5">Details</button>
            </div>
           </div>
@@ -53,7 +54,7 @@ const loadPhoneDetail = phoneId => {
 
 
 const displayPhoneDetails = phoneDetails => {
-  console.log(phoneDetails);
+  // console.log(phoneDetails);
   const setPhoneDetail = document.getElementById('set-phone-details')
   setPhoneDetail.innerText = '';
   const div = document.createElement('div');
