@@ -57,8 +57,8 @@ const displayPhoneDetails = phoneDetails => {
     <div class="card">
       <img src="${phoneDetails.image}" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">${phoneDetails.name}</h5>
-        <p class="card-text">${phoneDetails.releaseDate}</p>
+        <h4 class="card-title text-center fw-bold">${phoneDetails.name}</h4>
+        <p id="release-date" class="card-text text-center fw-bold">${phoneDetails.releaseDate}</p>
         <ul id="setMainFeatures"></ul>
       </div>
     </div>
@@ -67,9 +67,13 @@ const displayPhoneDetails = phoneDetails => {
 
   const setMainFeatures = document.getElementById('setMainFeatures');
   for (const mainFeature in phoneDetails.mainFeatures) {
-    console.log(mainFeature);
+    // console.log(mainFeature);
     const li = document.createElement('li');
     li.innerText = `${mainFeature}: ${phoneDetails.mainFeatures[mainFeature]}`
     setMainFeatures.appendChild(li);
+  }
+  const releaseDate = document.getElementById('release-date');
+  if (releaseDate.innerText === '') {
+    releaseDate.innerText = 'No released date found'
   }
 }
