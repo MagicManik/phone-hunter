@@ -26,12 +26,14 @@ const displaySearchResult = phones => {
     const div = document.createElement('div');
     div.innerHTML = `
       <div class="col">
-          <div class="card h-100">
-            <img src="${phone.image}" class="card-img-top" alt="...">
+          <div class="card h-100 border-0 shadow rounded-3">
+            <img class="w-50 mx-auto mt-4" src="${phone.image}" class="card-img-top" alt="...">
             <div class="card-body">
             <h5 class="card-title">${phone.phone_name}</h5>
-            <p class="card-text">${phone.brand}</p>
-            <button onclick="loadPhoneDetail('${phone.slug}')" class="btn btn-primary">Details</button>
+            <h6 class="card-text text-primary">${phone.brand}</h6>
+           <div class="card border-0">
+           <button onclick="loadPhoneDetail('${phone.slug}')" class="btn btn-primary rounded-pill w-50 mx-auto px-5">Details</button>
+           </div>
           </div>
       </div>
     `;
@@ -56,11 +58,14 @@ const displayPhoneDetails = phoneDetails => {
   setPhoneDetail.innerText = '';
   const div = document.createElement('div');
   div.innerHTML = `
-    <div class="card">
-      <img src="${phoneDetails.image}" class="card-img-top" alt="...">
+    <div class="card rounded-3">
+      <img class="w-50 mx-auto mt-4" src="${phoneDetails.image}" class="card-img-top" alt="...">
       <div class="card-body">
         <h4 class="card-title text-center fw-bold">${phoneDetails.name}</h4>
-        <p id="release-date" class="card-text text-center fw-bold">${phoneDetails.releaseDate}</p>
+        <h6 id="release-date" class="card-text text-center">${phoneDetails.releaseDate}</h6>
+        <h6 id="release-date" class="card-text text-center">Brand:
+        <span class="text-primary">${phoneDetails.brand}</span></h6>
+        <p class="fw-bold mt-4"><u>Main Features:</u></p>
         <ul id="setMainFeatures"></ul>
       </div>
     </div>
@@ -71,11 +76,13 @@ const displayPhoneDetails = phoneDetails => {
   for (const mainFeature in phoneDetails.mainFeatures) {
     // console.log(mainFeature);
     const li = document.createElement('li');
-    li.innerHTML = `<span class="fw-bold">${mainFeature}:</span> ${phoneDetails.mainFeatures[mainFeature]}`
+    li.innerHTML = `<h6 class="fw-bold">${mainFeature}:</h6>
+                        ${phoneDetails.mainFeatures[mainFeature]}
+                   `
     setMainFeatures.appendChild(li);
   }
   const releaseDate = document.getElementById('release-date');
   if (releaseDate.innerText === '') {
-    releaseDate.innerText = 'No released date found'
+    releaseDate.innerHTML = `<span class="text-danger">No released date found</span>`
   }
 }
