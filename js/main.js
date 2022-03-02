@@ -16,9 +16,8 @@ const searchPhone = () => {
 
 }
 
-// create function for display search result
+// function of display search result
 const displaySearchResult = phones => {
-  // console.log(phones);
 
   // keep search result and details div
   const setSearchResult = document.getElementById('set-search-result');
@@ -28,10 +27,21 @@ const displaySearchResult = phones => {
   setSearchResult.textContent = '';
   setPhoneDetails.textContent = '';
 
+  // if search result
+  if (phones.length === 0) {
+    const noResult = document.getElementById('no-result');
+    noResult.innerText = 'Oops! search result not found!';
+    return;
+  }
+
+  // clear no result message again click search button
+  const noResult = document.getElementById('no-result');
+  noResult.textContent = '';
+
   // control search result will be not more than 20
   const phoneSliced = phones.slice(0, 20);
 
-  // using for each loop on sliced phone and then
+  // using for each loop on sliced phone
   phoneSliced.forEach(phone => {
     // create div and then set dynamically inner html
     const div = document.createElement('div');
@@ -54,7 +64,7 @@ const displaySearchResult = phones => {
 }
 
 
-// create a function for create a dynamic phone detail url
+// function of create a dynamic phone detail url
 const loadPhoneDetail = phoneId => {
   const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`
   fetch(url)
@@ -63,7 +73,7 @@ const loadPhoneDetail = phoneId => {
 }
 
 
-// create a function to set phone details
+// function of set phone details
 const displayPhoneDetails = phoneDetails => {
 
   // keep phone detail div
@@ -99,7 +109,7 @@ const displayPhoneDetails = phoneDetails => {
 
   // keep main features id
   const setMainFeatures = document.getElementById('setMainFeatures');
-  // using for in loop on mainfeatures
+  // using for in loop on mainfeatures data
   for (const mainFeature in phoneDetails.mainFeatures) {
     // create li for set main feature on phone details
     const li = document.createElement('li');
@@ -112,6 +122,7 @@ const displayPhoneDetails = phoneDetails => {
 
   // keep ul for append other features
   const setOtherFeatures = document.getElementById('setOtherFeatures');
+  // using for in loop on others data
   for (const otherFeature in phoneDetails.others) {
     // create li for set other feature on phone details
     const li2 = document.createElement('li');
