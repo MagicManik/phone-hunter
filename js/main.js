@@ -18,6 +18,7 @@ const searchPhone = () => {
 
 
 const displaySearchResult = phones => {
+
   // console.log(phones);
   const setSearchResult = document.getElementById('set-search-result');
   const setPhoneDetail = document.getElementById('set-phone-details');
@@ -70,9 +71,9 @@ const displayPhoneDetails = phoneDetails => {
         <h6 id="release-date" class="card-text text-center">${phoneDetails.releaseDate}</h6>
         <h6 id="release-date" class="card-text text-center">Brand:
         <span class="text-primary">${phoneDetails.brand}</span></h6>
-        <p class="fw-bold mt-4"><u class="text-primary">Main Features</u></p>
+        <p class="fw-bold mt-4"><u>Main Features</u></p>
         <ul id="setMainFeatures"></ul>
-        <p class="fw-bold mt-4"><u class="text-primary">Other Features</u></p>
+        <p class="fw-bold mt-4"><u>Other Features</u></p>
         <ul id="setOtherFeatures"></ul>
       </div>
     </div>
