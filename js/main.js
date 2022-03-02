@@ -49,7 +49,7 @@ const loadPhoneDetail = phoneId => {
 
 
 const displayPhoneDetails = phoneDetails => {
-  // console.log(phoneDetails);
+  console.log(phoneDetails);
   const setPhoneDetail = document.getElementById('set-phone-details')
   setPhoneDetail.innerText = '';
   const div = document.createElement('div');
@@ -69,7 +69,7 @@ const displayPhoneDetails = phoneDetails => {
   for (const mainFeature in phoneDetails.mainFeatures) {
     // console.log(mainFeature);
     const li = document.createElement('li');
-    li.innerText = `${mainFeature}: ${phoneDetails.mainFeatures[mainFeature]}`
+    li.innerHTML = `<span class="fw-bold">${mainFeature}:</span> ${phoneDetails.mainFeatures[mainFeature]}`
     setMainFeatures.appendChild(li);
   }
   const releaseDate = document.getElementById('release-date');
