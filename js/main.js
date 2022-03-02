@@ -18,7 +18,7 @@ const searchPhone = () => {
 
 
 const displaySearchResult = phones => {
-  console.log(phones);
+  // console.log(phones);
   const setSearchResult = document.getElementById('set-search-result');
   const setPhoneDetail = document.getElementById('set-phone-details');
   setSearchResult.textContent = '';
@@ -68,22 +68,37 @@ const displayPhoneDetails = phoneDetails => {
         <span class="text-primary">${phoneDetails.brand}</span></h6>
         <p class="fw-bold mt-4"><u>Main Features:</u></p>
         <ul id="setMainFeatures"></ul>
+        <p class="fw-bold mt-4"><u>Other Features:</u></p>
+        <ul id="setOtherFeatures"></ul>
       </div>
     </div>
   `;
   setPhoneDetail.appendChild(div);
+  const releaseDate = document.getElementById('release-date');
+  if (releaseDate.innerText === '') {
+    releaseDate.innerHTML = `<span class="text-danger">No released date found</span>`
+  }
 
   const setMainFeatures = document.getElementById('setMainFeatures');
   for (const mainFeature in phoneDetails.mainFeatures) {
     // console.log(mainFeature);
     const li = document.createElement('li');
-    li.innerHTML = `<h6 class="fw-bold">${mainFeature}:</h6>
+    li.innerHTML = `<h6 class="fw-bold">${mainFeature}</h6>
                         ${phoneDetails.mainFeatures[mainFeature]}
                    `
     setMainFeatures.appendChild(li);
   }
-  const releaseDate = document.getElementById('release-date');
-  if (releaseDate.innerText === '') {
-    releaseDate.innerHTML = `<span class="text-danger">No released date found</span>`
+
+  const setOtherFeatures = document.getElementById('setOtherFeatures');
+  for (const otherFeature in phoneDetails.others) {
+    // console.log(otherFeature);
+    // console.log(phoneDetails.others[otherFeature])
+    const li2 = document.createElement('li');
+    li2.innerHTML = `<h6>${otherFeature}</h6>
+    ${phoneDetails.others[otherFeature]}
+    `
+    setOtherFeatures.appendChild(li2);
+
+
   }
 }
