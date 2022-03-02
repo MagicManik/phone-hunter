@@ -19,7 +19,9 @@ const searchPhone = () => {
 
 const displaySearchResult = phones => {
   const setSearchResult = document.getElementById('set-search-result');
+  const setPhoneDetail = document.getElementById('set-phone-details');
   setSearchResult.textContent = '';
+  setPhoneDetail.textContent = '';
   for (const phone of phones) {
     const div = document.createElement('div');
     div.innerHTML = `
