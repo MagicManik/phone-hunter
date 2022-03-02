@@ -1,8 +1,9 @@
+// function of search phone
 const searchPhone = () => {
   const searchField = document.getElementById('search-field');
   const searchFieldText = searchField.value;
   if (searchFieldText == '') {
-
+    alert('Sorry! first of all type your favourite phone name then click me.')
   }
   else {
     searchField.value = '';
@@ -15,20 +16,24 @@ const searchPhone = () => {
 
 }
 
-
-
+// create function for display search result
 const displaySearchResult = phones => {
-
   // console.log(phones);
+
+  // keep search result and details div
   const setSearchResult = document.getElementById('set-search-result');
-  const setPhoneDetail = document.getElementById('set-phone-details');
+  const setPhoneDetails = document.getElementById('set-phone-details');
+
+  // clear search and detail result when set a new detail and search result
   setSearchResult.textContent = '';
-  setPhoneDetail.textContent = '';
+  setPhoneDetails.textContent = '';
 
   // control search result will be not more than 20
   const phoneSliced = phones.slice(0, 20);
 
+  // using for each loop on sliced phone and then
   phoneSliced.forEach(phone => {
+    // create div and then set dynamically inner html
     const div = document.createElement('div');
     div.innerHTML = `
     <div class="col">
@@ -43,12 +48,13 @@ const displaySearchResult = phones => {
         </div>
     </div>
   `;
+    // append dynamic inner html in search result div
     setSearchResult.appendChild(div);
   })
 }
 
 
-
+// create a function for create a dynamic phone detail url
 const loadPhoneDetail = phoneId => {
   const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`
   fetch(url)
@@ -57,11 +63,14 @@ const loadPhoneDetail = phoneId => {
 }
 
 
-
+// create a function to set phone details
 const displayPhoneDetails = phoneDetails => {
-  // console.log(phoneDetails);
-  const setPhoneDetail = document.getElementById('set-phone-details')
+
+  // keep phone detail div
+  const setPhoneDetail = document.getElementById('set-phone-details');
+  // clear previous phone detail befor set a new phone detail
   setPhoneDetail.innerText = '';
+  // creat div and then set dynamically phone details
   const div = document.createElement('div');
   div.innerHTML = `
     <div class="card rounded-3">
@@ -78,32 +87,38 @@ const displayPhoneDetails = phoneDetails => {
       </div>
     </div>
   `;
+  // append phone details
   setPhoneDetail.appendChild(div);
+
+  // keep release date id
   const releaseDate = document.getElementById('release-date');
+  // control release date
   if (releaseDate.innerText === '') {
     releaseDate.innerHTML = `<span class="text-danger">Release date is not found</span>`
   }
 
+  // keep main features id
   const setMainFeatures = document.getElementById('setMainFeatures');
+  // using for in loop on mainfeatures
   for (const mainFeature in phoneDetails.mainFeatures) {
-    // console.log(mainFeature);
+    // create li for set main feature on phone details
     const li = document.createElement('li');
     li.innerHTML = `<h6 class="fw-bold">${mainFeature}</h6>
                         ${phoneDetails.mainFeatures[mainFeature]}
                    `
+    // append li in main features
     setMainFeatures.appendChild(li);
   }
 
+  // keep ul for append other features
   const setOtherFeatures = document.getElementById('setOtherFeatures');
   for (const otherFeature in phoneDetails.others) {
-    // console.log(otherFeature);
-    // console.log(phoneDetails.others[otherFeature])
+    // create li for set other feature on phone details
     const li2 = document.createElement('li');
     li2.innerHTML = `<h6>${otherFeature}</h6>
     ${phoneDetails.others[otherFeature]}
     `
+    // append other features on phone details
     setOtherFeatures.appendChild(li2);
-
-
   }
 }
